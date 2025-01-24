@@ -2,46 +2,63 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- EditText for user input -->
+
+    <!-- Button for saving input -->
+
+    <!-- TextView for output -->
+
     <EditText
-        android:id="@+id/enterAgeInputText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="206dp"
-        android:layout_marginBottom="127dp"
-        android:ems="10"
-        android:hint="Enter Age"
+        android:id="@+id/enterAgeEditText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="492dp"
+        android:hint="Enter your age"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/yourAgeText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/yourAgeText"
-        android:layout_width="139dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="77dp"
-        android:text="Your Age: "
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/saveButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterAgeInputText" />
-
     <Button
         android:id="@+id/saveButton"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="100dp"
+        android:onClick="saveEnteredAge"
+        android:text="Save"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterAgeEditText" />
+
+    <TextView
+        android:id="@+id/yourAgeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="161dp"
-        android:text="Save"
+        android:text="Your age: "
+        android:textAlignment="center"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/yourAgeText"
-        app:layout_constraintTop_toBottomOf="@+id/yourAgeText" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="60dp"
+        android:onClick="deleteStoredAge"
+        android:text="Delete"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterAgeEditText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
