@@ -3,6 +3,7 @@ package com.example.alertdialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -30,8 +31,23 @@ public class MainActivity extends AppCompatActivity {
 
         alert.setTitle("Save Data");
         alert.setMessage("Do you really want to save?");
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //save
+                Toast.makeText(MainActivity.this, "Save Successful!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        //alert.setNegativeButton(MainActivity.this, )
+        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //save cancel
+                Toast.makeText(MainActivity.this, "Save Canceled!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alert.show();
 
     }
 }
