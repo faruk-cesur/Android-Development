@@ -1,4 +1,4 @@
-package com.example.catchthekenny;
+package com.atilsamancioglu.catchthekenny;
 
 import org.junit.Test;
 
