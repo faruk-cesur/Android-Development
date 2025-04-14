@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity() {
             finishAffinity()
         }
 
+        alert.setCancelable(false)
         alert.show()
     }
 

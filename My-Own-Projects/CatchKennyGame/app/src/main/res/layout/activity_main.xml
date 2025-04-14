@@ -225,41 +225,6 @@
             app:layout_row="4"
             app:srcCompat="@drawable/kenny" />
 
-        <ImageView
-            android:id="@+id/kennyImage21"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:onClick="increaseScore"
-            app:layout_column="0"
-            app:layout_row="5"
-            app:srcCompat="@drawable/kenny" />
-
-        <ImageView
-            android:id="@+id/kennyImage22"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:onClick="increaseScore"
-            app:layout_column="1"
-            app:layout_row="5"
-            app:srcCompat="@drawable/kenny" />
-
-        <ImageView
-            android:id="@+id/kennyImage23"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:onClick="increaseScore"
-            app:layout_column="2"
-            app:layout_row="5"
-            app:srcCompat="@drawable/kenny" />
-
-        <ImageView
-            android:id="@+id/kennyImage24"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:onClick="increaseScore"
-            app:layout_column="3"
-            app:layout_row="5"
-            app:srcCompat="@drawable/kenny" />
     </androidx.gridlayout.widget.GridLayout>
 
     <TextView
