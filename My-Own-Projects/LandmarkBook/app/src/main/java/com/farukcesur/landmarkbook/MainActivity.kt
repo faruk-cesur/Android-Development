@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.farukcesur.landmarkbook.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         landmarkList.add(kabe)
         landmarkList.add(medine)
 
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        val landmarkAdapter = LandmarkAdapter(landmarkList)
+        binding.recyclerView.adapter = landmarkAdapter
+
+        /*
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, landmarkList.map { landmark -> landmark.name })
         binding.listView.adapter = adapter
 
@@ -48,5 +54,6 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("landmark", landmarkList.get(position))
                 startActivity(intent)
             }
+         */
     }
 }
