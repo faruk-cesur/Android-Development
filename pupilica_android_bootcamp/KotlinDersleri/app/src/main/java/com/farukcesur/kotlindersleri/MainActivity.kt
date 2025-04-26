@@ -1,4 +1,4 @@
-package com.farukcesur.kotlindersleri
+package com.example.kotlindersleri
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
