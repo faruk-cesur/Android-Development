@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.farukcesur.kotlindersleri"
-    compileSdk = 36
+    namespace = "com.example.kotlindersleri"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.farukcesur.kotlindersleri"
+        applicationId = "com.example.kotlindersleri"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -33,7 +33,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
