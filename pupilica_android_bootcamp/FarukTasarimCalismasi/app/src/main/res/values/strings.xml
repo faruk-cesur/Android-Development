@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">FarukTasarimCalismasi</string>
+    <string name="app_name">Login Screen App</string>
+    <string name="login">Log In</string>
+    <string name="signUp">Sign Up</string>
+    <string name="emailAddress">Email Address</string>
+    <string name="password">Password</string>
+    <string name="forgotPassword">Forgot Password?</string>
 </resources>

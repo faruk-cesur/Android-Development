@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LoginScreenApp</string>
+    <string name="login">Giriş Yap</string>
+    <string name="signUp">Kayıt Ol</string>
+    <string name="emailAddress">E-posta Adresi</string>
+    <string name="password">Şifre</string>
+    <string name="forgotPassword">Şifreni mi Unuttun?</string>
+</resources>
