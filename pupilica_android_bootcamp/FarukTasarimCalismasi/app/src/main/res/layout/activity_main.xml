@@ -5,25 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFE8C9"
     tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/iconRectangle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rectangle_1" />
 
     <ImageView
         android:id="@+id/appIconImage"
         android:layout_width="175dp"
         android:layout_height="175dp"
         android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="@+id/iconRectangle"
-        app:layout_constraintStart_toStartOf="@+id/iconRectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/book" />
 
@@ -32,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginBottom="37dp"
+        android:layout_marginTop="24dp"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
@@ -42,15 +33,15 @@
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/iconRectangle"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appIconImage" />
 
     <TextView
         android:id="@+id/signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="64dp"
-        android:layout_marginBottom="37dp"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
@@ -60,18 +51,19 @@
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/iconRectangle"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appIconImage" />
 
     <TextView
         android:id="@+id/emailAddressTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="Email address"
-        android:textColor="#67000000"
+        android:textColor="#80000000"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/selectedLineLogin"
-        app:layout_constraintTop_toBottomOf="@+id/iconRectangle" />
+        app:layout_constraintTop_toBottomOf="@+id/selectedLineLogin" />
 
     <TextView
         android:id="@+id/passwordTitle"
@@ -79,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Password"
-        android:textColor="#67000000"
+        android:textColor="#80000000"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/emailAddressTitle"
         app:layout_constraintTop_toBottomOf="@+id/emailAddressEditText" />
@@ -131,16 +123,13 @@
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="64dp"
         android:backgroundTint="#FA4A0C"
         android:text="Log In"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/iconRectangle"
-        app:layout_constraintStart_toStartOf="@+id/iconRectangle"
-        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordButton" />
+        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordButton"
+        tools:layout_editor_absoluteX="64dp" />
 
     <ImageView
         android:id="@+id/selectedLineLogin"
