@@ -7,6 +7,10 @@ android {
     namespace = "com.farukcesur.navigationcomponenthomework"
     compileSdk = 35
 
+    buildFeatures{
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.farukcesur.navigationcomponenthomework"
         minSdk = 24
