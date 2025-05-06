@@ -21,7 +21,11 @@
         android:id="@+id/kisiDetayFragment"
         android:name="com.farukcesur.kisileruygulamasi.ui.fragment.KisiDetayFragment"
         android:label="fragment_kisi_detay"
-        tools:layout="@layout/fragment_kisi_detay" />
+        tools:layout="@layout/fragment_kisi_detay" >
+        <argument
+            android:name="kisi"
+            app:argType="com.farukcesur.kisileruygulamasi.data.entity.Kisiler" />
+    </fragment>
     <fragment
         android:id="@+id/kisiKayitFragment"
         android:name="com.farukcesur.kisileruygulamasi.ui.fragment.KisiKayitFragment"
