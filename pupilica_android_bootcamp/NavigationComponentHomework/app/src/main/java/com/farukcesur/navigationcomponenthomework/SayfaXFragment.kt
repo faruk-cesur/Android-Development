@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.farukcesur.navigationcomponenthomework.databinding.FragmentSayfaXBinding
 
 class SayfaXFragment : Fragment() {
@@ -14,6 +15,12 @@ class SayfaXFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSayfaXBinding.inflate(inflater,container,false)
+
+
+        binding.gitYButton2.setOnClickListener {
+            val gecis = SayfaXFragmentDirections.actionSayfaXFragmentToSayfaYFragment()
+            findNavController().navigate(gecis)
+        }
 
         return binding.root
     }
