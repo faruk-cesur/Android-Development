@@ -9,7 +9,14 @@
         android:id="@+id/anasayfaFragment"
         android:name="com.farukcesur.kisileruygulamasi.ui.fragment.AnasayfaFragment"
         android:label="fragment_anasayfa"
-        tools:layout="@layout/fragment_anasayfa" />
+        tools:layout="@layout/fragment_anasayfa" >
+        <action
+            android:id="@+id/kisiDetayGecis"
+            app:destination="@id/kisiDetayFragment" />
+        <action
+            android:id="@+id/kisiKayitGecis"
+            app:destination="@id/kisiKayitFragment" />
+    </fragment>
     <fragment
         android:id="@+id/kisiDetayFragment"
         android:name="com.farukcesur.kisileruygulamasi.ui.fragment.KisiDetayFragment"

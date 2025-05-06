@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.farukcesur.kisileruygulamasi.R
 import com.farukcesur.kisileruygulamasi.databinding.FragmentAnasayfaBinding
 
@@ -16,6 +17,15 @@ class AnasayfaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAnasayfaBinding.inflate(inflater, container, false)
+
+        binding.fab.setOnClickListener{
+            Navigation.findNavController(it).navigate(R.id.kisiKayitGecis)
+        }
+
+        binding.buttonDetay.setOnClickListener{
+            Navigation.findNavController(it).navigate(R.id.kisiDetayGecis)
+        }
+
         return binding.root
     }
 }
