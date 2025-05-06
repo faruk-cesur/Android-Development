@@ -5,4 +5,236 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/resultBackgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:background="@color/material_dynamic_neutral10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/numbersBackgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultBackgroundImage"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/resultBackgroundImage"
+        app:layout_constraintEnd_toEndOf="@+id/resultBackgroundImage"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/resultBackgroundImage"
+        app:layout_constraintTop_toTopOf="@+id/resultBackgroundImage"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#673AB7"
+        android:text="C"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/additionButton"
+        app:layout_constraintEnd_toEndOf="@+id/numbersBackgroundImage" />
+
+    <Button
+        android:id="@+id/additionButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#03A9F4"
+        android:text="+"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/equalButton"
+        app:layout_constraintEnd_toEndOf="@+id/numbersBackgroundImage" />
+
+    <Button
+        android:id="@+id/equalButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="#4CAF50"
+        android:text="="
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/numbersBackgroundImage" />
+
+    <Button
+        android:id="@+id/zeroButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:backgroundTint="#2A2B2E"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/equalButton"
+        app:layout_constraintStart_toStartOf="@+id/twoButton" />
+
+    <Button
+        android:id="@+id/oneButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#2A2B2E"
+        android:text="1"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/twoButton"
+        app:layout_constraintEnd_toStartOf="@+id/twoButton" />
+
+    <Button
+        android:id="@+id/twoButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#2A2B2E"
+        android:text="2"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/threeButton"
+        app:layout_constraintEnd_toStartOf="@+id/threeButton" />
+
+    <Button
+        android:id="@+id/threeButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#2A2B2E"
+        android:text="3"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/additionButton"
+        app:layout_constraintEnd_toStartOf="@+id/additionButton" />
+
+    <Button
+        android:id="@+id/fourButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#2A2B2E"
+        android:text="4"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fiveButton"
+        app:layout_constraintEnd_toStartOf="@+id/fiveButton" />
+
+    <Button
+        android:id="@+id/fiveButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#2A2B2E"
+        android:text="5"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sixButton"
+        app:layout_constraintEnd_toStartOf="@+id/sixButton" />
+
+    <Button
+        android:id="@+id/sixButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#2A2B2E"
+        android:text="6"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/resetButton"
+        app:layout_constraintEnd_toStartOf="@+id/resetButton" />
+
+    <Button
+        android:id="@+id/sevenButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#2A2B2E"
+        android:text="7"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/fourButton"
+        app:layout_constraintEnd_toStartOf="@+id/eightButton" />
+
+    <Button
+        android:id="@+id/eightButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#2A2B2E"
+        android:text="8"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/fiveButton"
+        app:layout_constraintEnd_toStartOf="@+id/nineButton" />
+
+    <Button
+        android:id="@+id/nineButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#2A2B2E"
+        android:text="9"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/sixButton"
+        app:layout_constraintEnd_toStartOf="@+id/resetButton" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
