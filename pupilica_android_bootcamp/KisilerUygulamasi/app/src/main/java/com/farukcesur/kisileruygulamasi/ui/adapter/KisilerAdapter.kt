@@ -1,6 +1,7 @@
 package com.farukcesur.kisileruygulamasi.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.farukcesur.kisileruygulamasi.data.entity.Kisiler
 import com.farukcesur.kisileruygulamasi.databinding.CardTasarimBinding
 import com.farukcesur.kisileruygulamasi.ui.fragment.AnasayfaFragmentDirections
+import com.google.android.material.snackbar.Snackbar
 
 class KisilerAdapter(var mContext: Context, var kisilerListesi: List<Kisiler>)
     : RecyclerView.Adapter<KisilerAdapter.CardTasarimTutucu>(){
@@ -31,11 +33,18 @@ class KisilerAdapter(var mContext: Context, var kisilerListesi: List<Kisiler>)
         }
 
         t.imageViewSil.setOnClickListener{
-
+            Snackbar.make(it,"${kisi.kisi_ad} silinsin mi?", Snackbar.LENGTH_SHORT)
+                .setAction("EVET"){
+                    sil(kisi.kisi_id)
+                }.show()
         }
     }
 
     override fun getItemCount(): Int {
         return kisilerListesi.size
+    }
+
+    fun sil(kisi_id:Int){
+        Log.e("Kişi Sil",kisi_id.toString())
     }
 }
