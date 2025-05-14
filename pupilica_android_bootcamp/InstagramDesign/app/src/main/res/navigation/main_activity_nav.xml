@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.instagramdesign.ui.fragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/postDetailFragment"
         android:name="com.example.instagramdesign.ui.fragment.PostDetailFragment"
@@ -25,4 +29,9 @@
         android:name="com.example.instagramdesign.ui.fragment.StoriesFragment"
         android:label="fragment_stories"
         tools:layout="@layout/fragment_stories" />
+    <fragment
+        android:id="@+id/profileTitleFragment"
+        android:name="com.example.instagramdesign.ui.fragment.ProfileTitleFragment"
+        android:label="fragment_profile_title"
+        tools:layout="@layout/fragment_profile_title" />
 </navigation>
