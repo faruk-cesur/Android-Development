@@ -1,11 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
     namespace = "com.farukcesur.orderfoodapp"
     compileSdk = 35
+
+    buildFeatures {
+        viewBinding = true
+    }
 
     defaultConfig {
         applicationId = "com.farukcesur.orderfoodapp"
@@ -42,4 +49,25 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.56")
+    kapt("com.google.dagger:hilt-android-compiler:2.56")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.6.0")
+    implementation("com.google.code.gson:gson:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.5.0")
+
+    // Glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    kapt ("com.github.bumptech.glide:compiler:4.16.0")
+
+    // RecyclerView
+    implementation ("androidx.recyclerview:recyclerview:1.4.0")
+
+    // Lifecycle ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.0")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.9.0")
+    implementation("androidx.activity:activity-ktx:1.10.1")
 }
