@@ -20,9 +20,8 @@ class FoodAdapter(
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
         val food = foodList[position]
         holder.binding.apply {
-            tvFoodName.text = food.name
-            tvFoodDescription.text = food.description
-            tvFoodPrice.text = "${food.price} ₺"
+            tvFoodName.text = food.yemek_adi
+            tvFoodPrice.text = "${food.yemek_fiyat} ₺"
             // Glide ile resim yükleme (eğer Glide varsa)
             // Glide.with(ivFoodImage.context).load(food.imageUrl).into(ivFoodImage)
         }

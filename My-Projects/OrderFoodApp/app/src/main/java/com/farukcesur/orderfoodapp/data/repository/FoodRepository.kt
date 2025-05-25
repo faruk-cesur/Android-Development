@@ -10,12 +10,10 @@ class FoodRepository @Inject constructor(
 
     suspend fun getFoods(): List<Food> {
         val response = foodService.getFoods()
-
-        // Yanıt başarılıysa ve body boş değilse veriyi döndür
-        if (response.isSuccessful && response.body() != null) {
-            return response.body()!!
+        return if (response.isSuccessful) {
+            response.body()?.yemekler ?: emptyList()
         } else {
-            throw Exception("Veri çekme başarısız: ${response.code()}")
+            emptyList()
         }
     }
 }
