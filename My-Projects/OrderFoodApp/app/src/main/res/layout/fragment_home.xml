@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragmentHomeRoot"
+    android:id="@+id/homeFragmentRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -14,8 +14,11 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:padding="16dp"
+        android:paddingTop="24dp"
+
+        android:paddingBottom="12dp"
         android:text="Yemek Marketiniz"
+        android:textColor="#49454F"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -24,18 +27,20 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="3dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
         android:iconifiedByDefault="false"
         android:queryHint="Yemek ara..." />
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFoods"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:paddingHorizontal="16dp"
         android:clipToPadding="false"
-        android:padding="16dp"
+        android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2" />
 
@@ -44,7 +49,6 @@
         android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="8dp"
         android:background="#49454F"
         android:gravity="center"
         android:orientation="horizontal">
