@@ -10,4 +10,5 @@
         android:name="com.farukcesur.orderfoodapp.ui.screens.home.HomeFragment"
         android:label="Yemek Marketiniz"
         tools:layout="@layout/fragment_home" />
+
 </navigation>
