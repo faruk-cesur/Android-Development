@@ -1,6 +1,5 @@
 package com.farukcesur.orderfoodapp.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.farukcesur.orderfoodapp.data.model.Food
@@ -22,14 +21,15 @@ class FoodViewModel @Inject constructor(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
 
+    // Bellekte tüm veriyi tut
+    private var allFoods: List<Food> = emptyList()
+
     fun fetchFoods() {
         viewModelScope.launch {
             try {
-                val foodList = repository.getFoods()
-                Log.d("API_RESULT", "Gelen veri: $foodList") // ✳️ Debug için
-                _foods.value = foodList
+                allFoods = repository.getFoods()
+                _foods.value = allFoods
             } catch (e: Exception) {
-                Log.e("API_RESULT", "Hata: ${e.message}")
                 _error.value = e.message
             }
         }
@@ -37,8 +37,13 @@ class FoodViewModel @Inject constructor(
 
     fun searchFoods(query: String) {
         viewModelScope.launch {
-            val all = repository.getFoods()
-            _foods.value = all.filter { it.yemek_adi.contains(query, ignoreCase = true) }
+            _foods.value = if (query.isBlank()) {
+                allFoods
+            } else {
+                allFoods.filter { food ->
+                    food.yemek_adi.contains(query, ignoreCase = true)
+                }
+            }
         }
     }
 }

@@ -44,6 +44,18 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2" />
 
+    <!-- fragment_home.xml içine RecyclerView altına ekle -->
+    <TextView
+        android:id="@+id/textViewNoResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Sonuç bulunamadı"
+        android:textAlignment="center"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
     <!-- Alt Menü -->
     <LinearLayout
         android:id="@+id/bottomMenu"

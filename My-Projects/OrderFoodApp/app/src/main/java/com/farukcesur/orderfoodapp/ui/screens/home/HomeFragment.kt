@@ -14,6 +14,8 @@ import com.farukcesur.orderfoodapp.databinding.FragmentHomeBinding
 import com.farukcesur.orderfoodapp.ui.adapter.FoodAdapter
 import com.farukcesur.orderfoodapp.ui.viewmodel.FoodViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -25,8 +27,12 @@ class HomeFragment : Fragment() {
     private val viewModel: FoodViewModel by viewModels()
     private lateinit var adapter: FoodAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    private var searchJob: Job? = null // debounce için gerekli
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -45,6 +51,10 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.foods.collectLatest { list ->
                 adapter.submitList(list)
+
+                // Eğer liste boşsa "Sonuç bulunamadı" mesajını göster
+                binding.textViewNoResults.visibility =
+                    if (list.isEmpty()) View.VISIBLE else View.GONE
             }
         }
 
@@ -56,14 +66,19 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Arama işlevi
+        // Arama işlevi (debounce + anlık filtreleme)
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?) = true.also {
                 query?.let { viewModel.searchFoods(it) }
             }
 
-            override fun onQueryTextChange(newText: String?) = true.also {
-                if (newText.isNullOrBlank()) viewModel.fetchFoods()
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchJob?.cancel()
+                searchJob = viewLifecycleOwner.lifecycleScope.launch {
+                    delay(300) // 300ms debounce
+                    viewModel.searchFoods(newText.orEmpty())
+                }
+                return true
             }
         })
 
