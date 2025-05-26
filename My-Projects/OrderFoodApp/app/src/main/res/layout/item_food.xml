@@ -53,19 +53,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingStart="5dp"
                 android:text="₺0000"
                 android:textColor="#4CAF50"
                 android:textSize="20sp" />
 
             <ImageButton
                 android:id="@+id/btnAddToCart"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Sepete Ekle"
                 android:scaleType="fitCenter"
-                app:tint="#4CAF50"
-                tools:src="@drawable/ic_add" />
+                android:src="@drawable/ic_add"
+                app:tint="#4CAF50" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
