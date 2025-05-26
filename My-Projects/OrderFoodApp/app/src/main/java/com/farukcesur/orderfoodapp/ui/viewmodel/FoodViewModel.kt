@@ -21,18 +21,20 @@ class FoodViewModel @Inject constructor(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
 
-    init {
-        fetchFoods()
-    }
-
-    private fun fetchFoods() {
+    fun fetchFoods() {
         viewModelScope.launch {
             try {
-                val result = repository.getFoods()
-                _foods.value = result
+                _foods.value = repository.getFoods()
             } catch (e: Exception) {
                 _error.value = e.message
             }
+        }
+    }
+
+    fun searchFoods(query: String) {
+        viewModelScope.launch {
+            val all = repository.getFoods()
+            _foods.value = all.filter { it.yemek_adi.contains(query, ignoreCase = true) }
         }
     }
 }

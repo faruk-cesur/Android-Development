@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -13,19 +15,18 @@ import com.farukcesur.orderfoodapp.ui.adapter.FoodAdapter
 import com.farukcesur.orderfoodapp.ui.viewmodel.FoodViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: FoodViewModel by viewModels()
+    private lateinit var adapter: FoodAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -33,30 +34,39 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupObservers()
-    }
+        adapter = FoodAdapter()
+        binding.recyclerView.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            this.adapter = adapter
+        }
 
-    private fun setupObservers() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.foods.collectLatest { foodList ->
-                if (foodList.isNotEmpty()) {
-                    val adapter = FoodAdapter(foodList)
-                    binding.recyclerView.apply {
-                        layoutManager = GridLayoutManager(requireContext(), 2)
-                        this.adapter = adapter
-                    }
+        // Veri akışlarını topla
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.foods.collectLatest { list ->
+                adapter.submitList(list)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.error.collectLatest { err ->
+                err?.let {
+                    Toast.makeText(requireContext(), "Hata: $it", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.error.collectLatest { errorMessage ->
-                errorMessage?.let {
-                    // Hata mesajı gösterilebilir, örneğin Toast ile
-                    // Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                }
+        // Arama
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?) = true.also {
+                query?.let { viewModel.searchFoods(it) }
             }
-        }
+            override fun onQueryTextChange(newText: String?) = true.also {
+                if (newText.isNullOrBlank()) viewModel.fetchFoods()
+            }
+        })
+
+        // İlk veri çek
+        viewModel.fetchFoods()
     }
 
     override fun onDestroyView() {

@@ -9,9 +9,9 @@ class FoodRepository @Inject constructor(
 ) {
 
     suspend fun getFoods(): List<Food> {
-        val response = foodService.getFoods()
-        return if (response.isSuccessful) {
-            response.body()?.yemekler ?: emptyList()
+        val resp = foodService.getFoods()
+        return if (resp.isSuccessful) {
+            resp.body()?.yemekler ?: emptyList()
         } else {
             emptyList()
         }
