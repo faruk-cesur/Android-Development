@@ -1,5 +1,6 @@
 package com.farukcesur.orderfoodapp.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.farukcesur.orderfoodapp.data.model.Food
@@ -24,8 +25,11 @@ class FoodViewModel @Inject constructor(
     fun fetchFoods() {
         viewModelScope.launch {
             try {
-                _foods.value = repository.getFoods()
+                val foodList = repository.getFoods()
+                Log.d("API_RESULT", "Gelen veri: $foodList") // ✳️ Debug için
+                _foods.value = foodList
             } catch (e: Exception) {
+                Log.e("API_RESULT", "Hata: ${e.message}")
                 _error.value = e.message
             }
         }

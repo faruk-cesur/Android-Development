@@ -11,7 +11,17 @@ class FoodAdapter(
     private var foodList: List<Food> = emptyList()
 ) : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
-    inner class FoodViewHolder(val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class FoodViewHolder(private val binding: ItemFoodBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(food: Food) {
+            binding.tvFoodName.text = food.yemek_adi
+            binding.tvFoodPrice.text = "₺${food.yemek_fiyat}"
+            val imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${food.yemek_resim_adi}"
+            Glide.with(binding.ivFoodImage.context)
+                .load(imageUrl)
+                .into(binding.ivFoodImage)
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         val binding = ItemFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,21 +29,13 @@ class FoodAdapter(
     }
 
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
-        val food = foodList[position]
-        holder.binding.apply {
-            tvFoodName.text = food.yemek_adi
-            tvFoodPrice.text = "₺${food.yemek_fiyat}"
-            val imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${food.yemek_resim_adi}"
-            Glide.with(ivFoodImage.context)
-                .load(imageUrl)
-                .into(ivFoodImage)
-        }
+        holder.bind(foodList[position])
     }
 
     override fun getItemCount(): Int = foodList.size
 
     fun submitList(list: List<Food>) {
-        this.foodList = list
+        foodList = list
         notifyDataSetChanged()
     }
 }

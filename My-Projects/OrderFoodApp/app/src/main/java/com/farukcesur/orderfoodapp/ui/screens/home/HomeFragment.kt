@@ -34,13 +34,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Adapter kur
         adapter = FoodAdapter()
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
-            this.adapter = adapter
+            adapter = this@HomeFragment.adapter
         }
 
-        // Veri akışlarını topla
+        // Veri akışlarını gözlemle
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.foods.collectLatest { list ->
                 adapter.submitList(list)
@@ -55,17 +56,18 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Arama
+        // Arama işlevi
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?) = true.also {
                 query?.let { viewModel.searchFoods(it) }
             }
+
             override fun onQueryTextChange(newText: String?) = true.also {
                 if (newText.isNullOrBlank()) viewModel.fetchFoods()
             }
         })
 
-        // İlk veri çek
+        // Başlangıçta veri çek
         viewModel.fetchFoods()
     }
 
