@@ -2,11 +2,14 @@ package com.farukcesur.orderfoodapp.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.farukcesur.orderfoodapp.data.model.CartItem
 import com.farukcesur.orderfoodapp.data.model.Food
 import com.farukcesur.orderfoodapp.data.repository.FoodRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,8 +24,14 @@ class FoodViewModel @Inject constructor(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
 
-    // Bellekte tüm veriyi tut
     private var allFoods: List<Food> = emptyList()
+
+    private val _cartItems = MutableStateFlow<List<CartItem>>(emptyList())
+    val cartItems: StateFlow<List<CartItem>> = _cartItems.asStateFlow()
+
+    // ✅ Toplam tutar için yeni state
+    private val _totalPrice = MutableStateFlow(0)
+    val totalPrice: StateFlow<Int> = _totalPrice.asStateFlow()
 
     fun fetchFoods() {
         viewModelScope.launch {
@@ -45,5 +54,51 @@ class FoodViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    // ✅ Sepete ürün ekleme (Q2 desteği: quantity artırma)
+    fun addToCart(food: Food) {
+        val currentList = _cartItems.value.toMutableList()
+        val existingItem = currentList.find { it.yemek.yemek_id == food.yemek_id }
+
+        if (existingItem != null) {
+            existingItem.quantity += 1
+        } else {
+            currentList.add(CartItem(yemek = food, quantity = 1))
+        }
+
+        _cartItems.value = currentList
+        calculateTotal()
+    }
+
+    // ✅ Sepetten ürün silme
+    fun removeFromCart(food: Food) {
+        val currentList = _cartItems.value.toMutableList()
+        currentList.removeAll { it.yemek.yemek_id == food.yemek_id }
+
+        _cartItems.value = currentList
+        calculateTotal()
+    }
+
+    // ✅ Miktarı azalt
+    fun decreaseQuantity(food: Food) {
+        val currentList = _cartItems.value.toMutableList()
+        val item = currentList.find { it.yemek.yemek_id == food.yemek_id }
+
+        item?.let {
+            if (it.quantity > 1) {
+                it.quantity -= 1
+            } else {
+                currentList.remove(it)
+            }
+            _cartItems.value = currentList
+            calculateTotal()
+        }
+    }
+
+    // ✅ Toplam fiyat hesapla
+    private fun calculateTotal() {
+        val total = _cartItems.value.sumOf { it.yemek.yemek_fiyat.toInt() * it.quantity }
+        _totalPrice.value = total
     }
 }

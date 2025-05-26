@@ -1,21 +1,30 @@
-// GÜNCELLENMİŞ MainActivity.kt
-
 package com.farukcesur.orderfoodapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import com.farukcesur.orderfoodapp.databinding.ActivityMainBinding
-import dagger.hilt.android.AndroidEntryPoint
+import androidx.navigation.ui.setupActionBarWithNavController
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
+
+        // Navigation Graph ile NavController'ı bağla
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        // (İsteğe bağlı) Üstteki ActionBar ile senkronizasyon
+        setupActionBarWithNavController(navController)
+    }
+
+    // Back tuşuna bastığında navigation geri gitsin
+    override fun onSupportNavigateUp(): Boolean {
+        val navController =
+            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
+                .navController
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

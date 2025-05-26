@@ -1,4 +1,4 @@
-package com.farukcesur.orderfoodapp.ui.screens.home
+package com.farukcesur.orderfoodapp.ui.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.farukcesur.orderfoodapp.R
 import com.farukcesur.orderfoodapp.databinding.FragmentHomeBinding
 import com.farukcesur.orderfoodapp.ui.adapter.FoodAdapter
 import com.farukcesur.orderfoodapp.ui.viewmodel.FoodViewModel
@@ -40,8 +42,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Adapter kur
-        adapter = FoodAdapter()
+        // ✅ Adapter kur ve sepete ekleme olayını dinle
+        adapter = FoodAdapter(onAddToCartClick = { selectedFood ->
+            viewModel.addToCart(selectedFood)
+            Toast.makeText(
+                requireContext(),
+                "${selectedFood.yemek_adi} sepete eklendi",
+                Toast.LENGTH_SHORT
+            ).show()
+        })
+
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = this@HomeFragment.adapter
@@ -51,8 +61,6 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.foods.collectLatest { list ->
                 adapter.submitList(list)
-
-                // Eğer liste boşsa "Sonuç bulunamadı" mesajını göster
                 binding.textViewNoResults.visibility =
                     if (list.isEmpty()) View.VISIBLE else View.GONE
             }
@@ -66,7 +74,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Arama işlevi (debounce + anlık filtreleme)
+        // Arama işlevi
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?) = true.also {
                 query?.let { viewModel.searchFoods(it) }
@@ -75,7 +83,7 @@ class HomeFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 searchJob?.cancel()
                 searchJob = viewLifecycleOwner.lifecycleScope.launch {
-                    delay(300) // 300ms debounce
+                    delay(300)
                     viewModel.searchFoods(newText.orEmpty())
                 }
                 return true
@@ -84,6 +92,20 @@ class HomeFragment : Fragment() {
 
         // Başlangıçta veri çek
         viewModel.fetchFoods()
+
+        // ✅ Alt Menü Butonları ile Navigasyon
+        binding.btnHome.setOnClickListener {
+            // Zaten home'tasın, istersen refresh yap
+            viewModel.fetchFoods()
+        }
+
+//        binding.btnFavorites.setOnClickListener {
+//            findNavController().navigate(R.id.action_homeFragment_to_favoritesFragment)
+//        }
+
+        binding.btnCart.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
+        }
     }
 
     override fun onDestroyView() {

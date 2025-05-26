@@ -1,3 +1,4 @@
+// FoodAdapter.kt
 package com.farukcesur.orderfoodapp.ui.adapter
 
 import android.view.LayoutInflater
@@ -8,7 +9,8 @@ import com.farukcesur.orderfoodapp.data.model.Food
 import com.farukcesur.orderfoodapp.databinding.ItemFoodBinding
 
 class FoodAdapter(
-    private var foodList: List<Food> = emptyList()
+    private var foodList: List<Food> = emptyList(),
+    private val onAddToCartClick: (Food) -> Unit
 ) : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     inner class FoodViewHolder(private val binding: ItemFoodBinding) :
@@ -20,6 +22,10 @@ class FoodAdapter(
             Glide.with(binding.ivFoodImage.context)
                 .load(imageUrl)
                 .into(binding.ivFoodImage)
+
+            binding.btnAddToCart.setOnClickListener {
+                onAddToCartClick(food)
+            }
         }
     }
 
