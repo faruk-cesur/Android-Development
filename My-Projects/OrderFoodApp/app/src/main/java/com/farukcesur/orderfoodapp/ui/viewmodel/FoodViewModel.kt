@@ -56,7 +56,7 @@ class FoodViewModel @Inject constructor(
         }
     }
 
-    // ✅ Sepete ürün ekleme (Q2 desteği: quantity artırma)
+    // ✅ Sepete ürün ekleme
     fun addToCart(food: Food) {
         val currentList = _cartItems.value.toMutableList()
         val existingItem = currentList.find { it.yemek.yemek_id == food.yemek_id }
@@ -100,5 +100,11 @@ class FoodViewModel @Inject constructor(
     private fun calculateTotal() {
         val total = _cartItems.value.sumOf { it.yemek.yemek_fiyat.toInt() * it.quantity }
         _totalPrice.value = total
+    }
+
+    // FoodViewModel.kt
+    fun clearCart() {
+        _cartItems.value = emptyList()
+        _totalPrice.value = 0
     }
 }

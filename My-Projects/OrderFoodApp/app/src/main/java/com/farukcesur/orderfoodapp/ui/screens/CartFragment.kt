@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.farukcesur.orderfoodapp.databinding.FragmentCartBinding
@@ -47,6 +47,20 @@ class CartFragment : Fragment() {
                 binding.textViewEmptyCart.visibility =
                     if (cartItems.isEmpty()) View.VISIBLE else View.GONE
             }
+        }
+
+        // ✅ Toplam fiyatı gözlemle ve tvTotalPrice’a yaz
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.totalPrice.collectLatest { total ->
+                val formatted = "Toplam: ₺${total},00"
+                binding.tvTotalPrice.text = formatted
+            }
+        }
+
+        // Sepeti onayla butonu
+        binding.btnConfirmCart.setOnClickListener {
+            Toast.makeText(requireContext(), "Sepet onaylandı!", Toast.LENGTH_SHORT).show()
+            viewModel.clearCart()
         }
     }
 
