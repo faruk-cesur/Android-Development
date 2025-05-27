@@ -15,7 +15,6 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:paddingTop="24dp"
-
         android:paddingBottom="12dp"
         android:text="Yemek Marketiniz"
         android:textColor="#49454F"
@@ -44,7 +43,6 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2" />
 
-    <!-- fragment_home.xml içine RecyclerView altına ekle -->
     <TextView
         android:id="@+id/textViewNoResults"
         android:layout_width="match_parent"
@@ -55,50 +53,4 @@
         android:textColor="@android:color/darker_gray"
         android:textSize="18sp"
         android:visibility="gone" />
-
-    <!-- Alt Menü -->
-    <LinearLayout
-        android:id="@+id/bottomMenu"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#49454F"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/btnHome"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Home"
-            android:padding="12dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_home"
-            app:tint="#FFFFFF" />
-
-        <ImageButton
-            android:id="@+id/btnFavorites"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Favorites"
-            android:padding="12dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_favorite"
-            app:tint="#FFFFFF" />
-
-        <ImageButton
-            android:id="@+id/btnCart"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Cart"
-            android:padding="12dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_cart"
-            app:tint="#FFFFFF" />
-    </LinearLayout>
 </LinearLayout>

@@ -93,20 +93,6 @@ class HomeFragment : Fragment() {
 
         // Başlangıçta veri çek
         viewModel.fetchFoods()
-
-        // ✅ Alt Menü Butonları ile Navigasyon
-        binding.btnHome.setOnClickListener {
-            // Zaten home'tasın, istersen refresh yap
-            viewModel.fetchFoods()
-        }
-
-//        binding.btnFavorites.setOnClickListener {
-//            findNavController().navigate(R.id.action_homeFragment_to_favoritesFragment)
-//        }
-
-        binding.btnCart.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
-        }
     }
 
     override fun onDestroyView() {

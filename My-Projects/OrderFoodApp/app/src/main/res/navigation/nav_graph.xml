@@ -34,4 +34,9 @@
         android:name="com.farukcesur.orderfoodapp.ui.screens.CartFragment"
         android:label="Sepet"
         tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/favoritesFragment2"
+        android:name="com.farukcesur.orderfoodapp.ui.screens.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
 </navigation>
