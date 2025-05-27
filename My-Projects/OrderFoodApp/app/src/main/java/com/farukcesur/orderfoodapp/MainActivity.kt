@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         // (İsteğe bağlı) Üstteki ActionBar ile senkronizasyon
-        setupActionBarWithNavController(navController)
+        //setupActionBarWithNavController(navController)
     }
 
     // Back tuşuna bastığında navigation geri gitsin
