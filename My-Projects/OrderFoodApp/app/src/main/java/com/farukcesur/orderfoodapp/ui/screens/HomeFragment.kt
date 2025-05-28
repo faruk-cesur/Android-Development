@@ -8,11 +8,9 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.farukcesur.orderfoodapp.R
 import com.farukcesur.orderfoodapp.databinding.FragmentHomeBinding
 import com.farukcesur.orderfoodapp.ui.adapter.FoodAdapter
 import com.farukcesur.orderfoodapp.ui.viewmodel.FoodViewModel
@@ -30,7 +28,7 @@ class HomeFragment : Fragment() {
     private val viewModel: FoodViewModel by activityViewModels()
     private lateinit var adapter: FoodAdapter
 
-    private var searchJob: Job? = null // debounce için gerekli
+    private var searchJob: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,22 +41,26 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // ✅ Adapter kur ve sepete ekleme olayını dinle
-        adapter = FoodAdapter(onAddToCartClick = { selectedFood ->
-            viewModel.addToCart(selectedFood)
-            Toast.makeText(
-                requireContext(),
-                "${selectedFood.yemek_adi} sepete eklendi",
-                Toast.LENGTH_SHORT
-            ).show()
-        })
+        adapter = FoodAdapter(
+            onAddToCartClick = { selectedFood ->
+                viewModel.addToCart(selectedFood)
+                Toast.makeText(
+                    requireContext(),
+                    "${selectedFood.yemek_adi} sepete eklendi",
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            onItemClick = { selectedFood ->
+                val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(selectedFood)
+                findNavController().navigate(action)
+            }
+        )
 
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = this@HomeFragment.adapter
         }
 
-        // Veri akışlarını gözlemle
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.foods.collectLatest { list ->
                 adapter.submitList(list)
@@ -75,7 +77,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Arama işlevi
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?) = true.also {
                 query?.let { viewModel.searchFoods(it) }
@@ -91,7 +92,6 @@ class HomeFragment : Fragment() {
             }
         })
 
-        // Başlangıçta veri çek
         viewModel.fetchFoods()
     }
 

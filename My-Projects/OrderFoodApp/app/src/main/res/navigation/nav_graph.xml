@@ -10,14 +10,11 @@
         android:id="@+id/homeFragment"
         android:name="com.farukcesur.orderfoodapp.ui.screens.HomeFragment"
         android:label="Yemek Marketiniz"
-        tools:layout="@layout/fragment_home"/>
-
-    <!-- Favoriler Fragment -->
-<!--    <fragment-->
-<!--        android:id="@+id/favoritesFragment"-->
-<!--        android:name="com.farukcesur.orderfoodapp.ui.screens.FavoritesFragment"-->
-<!--        android:label="Favoriler"-->
-<!--        tools:layout="@layout/fragment_favorites" />-->
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 
     <!-- Sepet Fragment -->
     <fragment
@@ -25,9 +22,22 @@
         android:name="com.farukcesur.orderfoodapp.ui.screens.CartFragment"
         android:label="Sepetinizdeki Yemekler"
         tools:layout="@layout/fragment_cart" />
+
+    <!-- Favoriler Fragment -->
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.farukcesur.orderfoodapp.ui.screens.FavoritesFragment"
         android:label="Favori Yemekleriniz"
         tools:layout="@layout/fragment_favorites" />
+
+    <!-- Yemek Detay Fragment -->
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.farukcesur.orderfoodapp.ui.screens.DetailFragment"
+        android:label="Yemek Detay" >
+        <argument
+            android:name="food"
+            app:argType="com.farukcesur.orderfoodapp.data.model.Food" />
+    </fragment>
+
 </navigation>

@@ -1,4 +1,3 @@
-// FoodAdapter.kt
 package com.farukcesur.orderfoodapp.ui.adapter
 
 import android.view.LayoutInflater
@@ -10,7 +9,8 @@ import com.farukcesur.orderfoodapp.databinding.ItemFoodBinding
 
 class FoodAdapter(
     private var foodList: List<Food> = emptyList(),
-    private val onAddToCartClick: (Food) -> Unit
+    private val onAddToCartClick: (Food) -> Unit,
+    private val onItemClick: (Food) -> Unit
 ) : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     inner class FoodViewHolder(private val binding: ItemFoodBinding) :
@@ -23,8 +23,14 @@ class FoodAdapter(
                 .load(imageUrl)
                 .into(binding.ivFoodImage)
 
+            // Sepete ekle butonu
             binding.btnAddToCart.setOnClickListener {
                 onAddToCartClick(food)
+            }
+
+            // Kartın tamamına tıklama (detay ekranına yönlendirme)
+            binding.root.setOnClickListener {
+                onItemClick(food)
             }
         }
     }
