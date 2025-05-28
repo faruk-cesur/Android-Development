@@ -3,15 +3,15 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:title="Anasayfa" />
 
     <item
         android:id="@+id/cartFragment"
         android:icon="@drawable/ic_cart"
-        android:title="Cart" />
+        android:title="Sepet" />
 
     <item
         android:id="@+id/favoritesFragment"
         android:icon="@drawable/ic_favorite"
-        android:title="Favorites" />
+        android:title="Favoriler" />
 </menu>
