@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/detailScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -41,5 +42,18 @@
             android:layout_height="wrap_content"
             android:text="Sepete Ekle"
             android:layout_marginTop="16dp" />
+
+        <ImageButton
+            android:id="@+id/btnFavoriteFromDetail"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center_horizontal"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_favorite_border"
+            android:contentDescription="Favoriye ekle"
+            android:scaleType="fitCenter"
+            app:tint="#F44336" />
+
     </LinearLayout>
 </ScrollView>

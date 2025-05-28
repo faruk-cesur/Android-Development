@@ -41,7 +41,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- Fiyat ve Sepete Ekle -->
+        <!-- Fiyat, Sepete Ekle ve Favori -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,13 +59,24 @@
                 android:textSize="20sp" />
 
             <ImageButton
+                android:id="@+id/btnFavorite"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Favoriye Ekle"
+                android:src="@drawable/ic_favorite_border"
+                android:scaleType="fitCenter"
+                android:layout_marginRight="10dp"
+                app:tint="#F44336" />
+
+            <ImageButton
                 android:id="@+id/btnAddToCart"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Sepete Ekle"
-                android:scaleType="fitCenter"
                 android:src="@drawable/ic_add"
+                android:scaleType="fitCenter"
                 app:tint="#4CAF50" />
         </LinearLayout>
     </LinearLayout>

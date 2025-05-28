@@ -29,7 +29,9 @@ class FoodViewModel @Inject constructor(
     private val _cartItems = MutableStateFlow<List<CartItem>>(emptyList())
     val cartItems: StateFlow<List<CartItem>> = _cartItems.asStateFlow()
 
-    // ✅ Toplam tutar için yeni state
+    private val _favoriteFoods = MutableStateFlow<List<Food>>(emptyList())
+    val favoriteFoods: StateFlow<List<Food>> = _favoriteFoods.asStateFlow()
+
     private val _totalPrice = MutableStateFlow(0)
     val totalPrice: StateFlow<Int> = _totalPrice.asStateFlow()
 
@@ -106,5 +108,26 @@ class FoodViewModel @Inject constructor(
     fun clearCart() {
         _cartItems.value = emptyList()
         _totalPrice.value = 0
+    }
+
+    // Favoriye ekle
+    fun addToFavorites(food: Food) {
+        val currentList = _favoriteFoods.value.toMutableList()
+        if (currentList.none { it.yemek_id == food.yemek_id }) {
+            currentList.add(food)
+            _favoriteFoods.value = currentList
+        }
+    }
+
+    // Favorilerden çıkar
+    fun removeFromFavorites(food: Food) {
+        val currentList = _favoriteFoods.value.toMutableList()
+        currentList.removeAll { it.yemek_id == food.yemek_id }
+        _favoriteFoods.value = currentList
+    }
+
+    // Favori mi kontrolü (isteğe bağlı kullanabilirsin)
+    fun isFavorite(food: Food): Boolean {
+        return _favoriteFoods.value?.contains(food) == true
     }
 }
