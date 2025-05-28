@@ -22,7 +22,8 @@
         app:itemIconSize="32dp"
         app:labelVisibilityMode="unlabeled"
         android:background="?android:attr/windowBackground"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        android:fitsSystemWindows="true"/>
 
     <!-- Bottom Navigation -->
 
