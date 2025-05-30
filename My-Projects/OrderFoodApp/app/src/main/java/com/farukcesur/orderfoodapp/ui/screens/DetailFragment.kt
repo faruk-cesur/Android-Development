@@ -23,8 +23,9 @@ class DetailFragment : Fragment() {
     private val viewModel: FoodViewModel by activityViewModels()
 
     private val args: DetailFragmentArgs by navArgs()
-
     private lateinit var currentFood: Food
+
+    private var localQuantity = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +40,6 @@ class DetailFragment : Fragment() {
 
         currentFood = args.food
 
-        // Bilgileri göster
         binding.textViewName.text = currentFood.yemek_adi
         binding.textViewPrice.text = "₺${currentFood.yemek_fiyat}"
 
@@ -47,16 +47,8 @@ class DetailFragment : Fragment() {
             .load("http://kasimadalan.pe.hu/yemekler/resimler/${currentFood.yemek_resim_adi}")
             .into(binding.imageViewFood)
 
-        // Sepete ekleme
-        binding.btnAddToCartFromDetail.setOnClickListener {
-            viewModel.addToCart(currentFood)
-            Toast.makeText(requireContext(), "Sepete eklendi", Toast.LENGTH_SHORT).show()
-        }
-
-        // Favori butonunun başlangıç durumunu ayarla
         updateFavoriteIcon()
 
-        // Favoriye ekleme / çıkarma işlemi
         binding.btnFavoriteFromDetail.setOnClickListener {
             if (viewModel.isFavorite(currentFood)) {
                 viewModel.removeFromFavorites(currentFood)
@@ -67,6 +59,35 @@ class DetailFragment : Fragment() {
             }
             updateFavoriteIcon()
         }
+
+        var selectedQuantity = 1
+        binding.textQuantity.text = selectedQuantity.toString()
+        updateTotalPrice(selectedQuantity)
+
+        binding.buttonIncrease.setOnClickListener {
+            selectedQuantity++
+            binding.textQuantity.text = selectedQuantity.toString()
+            updateTotalPrice(selectedQuantity)
+        }
+
+        binding.buttonDecrease.setOnClickListener {
+            if (selectedQuantity > 1) {
+                selectedQuantity--
+                binding.textQuantity.text = selectedQuantity.toString()
+                updateTotalPrice(selectedQuantity)
+            }
+        }
+
+        binding.btnAddToCartFromDetail.setOnClickListener {
+            viewModel.addToCart(currentFood, selectedQuantity)
+            Toast.makeText(requireContext(), "$selectedQuantity adet sepete eklendi", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun updateTotalPrice(quantity: Int) {
+        val unitPrice = currentFood.yemek_fiyat.toIntOrNull() ?: 0
+        val totalPrice = unitPrice * quantity
+        binding.textViewPrice.text = "₺$totalPrice"
     }
 
     private fun updateFavoriteIcon() {

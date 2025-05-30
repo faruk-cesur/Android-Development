@@ -2,6 +2,7 @@ package com.farukcesur.orderfoodapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farukcesur.orderfoodapp.databinding.ItemFoodBinding
@@ -29,17 +30,15 @@ class FavoritesAdapter(
                 tvFoodPrice.text = "${food.yemek_fiyat} ₺"
 
                 Glide.with(ivFoodImage.context)
-                    .load(food.yemek_resim_adi)
+                    .load("http://kasimadalan.pe.hu/yemekler/resimler/${food.yemek_resim_adi}")
                     .into(ivFoodImage)
 
-                // Favori durumuna göre ikon değiştir
                 val isFavorite = viewModel.isFavorite(food)
                 btnFavorite.setImageResource(
                     if (isFavorite) R.drawable.ic_favorite
                     else R.drawable.ic_favorite_border
                 )
 
-                // Favoriye ekleme / çıkarma
                 btnFavorite.setOnClickListener {
                     if (isFavorite) {
                         viewModel.removeFromFavorites(food)
@@ -48,9 +47,9 @@ class FavoritesAdapter(
                     }
                 }
 
-                // Sepete ekleme
                 btnAddToCart.setOnClickListener {
-                    viewModel.addToCart(food)
+                    viewModel.addToCart(food, 1)
+                    Toast.makeText(binding.root.context, "${food.yemek_adi} sepete eklendi", Toast.LENGTH_SHORT).show()
                 }
             }
         }

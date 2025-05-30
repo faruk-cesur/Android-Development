@@ -29,16 +29,22 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        val item = cartItems[position]
-        holder.foodName.text = item.yemek.yemek_adi
-        holder.foodPrice.text = "₺${item.yemek.yemek_fiyat} x ${item.quantity}"
+        val cartItem = cartItems[position]
+
+        holder.foodName.text = cartItem.yemek.yemek_adi
+
+        val unitPrice = cartItem.yemek.yemek_fiyat.toIntOrNull() ?: 0
+        val quantity = cartItem.quantity
+        val totalPrice = unitPrice * quantity
+
+        holder.foodPrice.text = "₺$unitPrice x $quantity = ₺$totalPrice"
 
         Glide.with(holder.itemView.context)
-            .load("http://kasimadalan.pe.hu/yemekler/resimler/${item.yemek.yemek_resim_adi}")
+            .load("http://kasimadalan.pe.hu/yemekler/resimler/${cartItem.yemek.yemek_resim_adi}")
             .into(holder.foodImage)
 
         holder.deleteIcon.setOnClickListener {
-            onDeleteClick(item)
+            onDeleteClick(cartItem)
         }
     }
 

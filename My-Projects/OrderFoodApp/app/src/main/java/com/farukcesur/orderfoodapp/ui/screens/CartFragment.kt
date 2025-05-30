@@ -43,13 +43,11 @@ class CartFragment : Fragment() {
                 }
                 binding.recyclerViewCart.adapter = adapter
 
-                // Sepet boşsa uyarı yazısını göster
                 binding.textViewEmptyCart.visibility =
                     if (cartItems.isEmpty()) View.VISIBLE else View.GONE
             }
         }
 
-        // ✅ Toplam fiyatı gözlemle ve tvTotalPrice’a yaz
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.totalPrice.collectLatest { total ->
                 val formatted = "Toplam: ₺${total},00"
@@ -57,7 +55,6 @@ class CartFragment : Fragment() {
             }
         }
 
-        // Sepeti onayla butonu
         binding.btnConfirmCart.setOnClickListener {
             Toast.makeText(requireContext(), "Sepet onaylandı!", Toast.LENGTH_SHORT).show()
             viewModel.clearCart()

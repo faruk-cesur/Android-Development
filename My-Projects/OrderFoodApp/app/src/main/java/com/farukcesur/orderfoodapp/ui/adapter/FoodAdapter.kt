@@ -4,10 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.farukcesur.orderfoodapp.R
 import com.farukcesur.orderfoodapp.data.model.Food
 import com.farukcesur.orderfoodapp.databinding.ItemFoodBinding
+import com.farukcesur.orderfoodapp.ui.viewmodel.FoodViewModel
 
 class FoodAdapter(
+    private val foodViewModel: FoodViewModel,
     private var foodList: List<Food> = emptyList(),
     private val onAddToCartClick: (Food) -> Unit,
     private val onItemClick: (Food) -> Unit
@@ -23,16 +26,29 @@ class FoodAdapter(
                 .load(imageUrl)
                 .into(binding.ivFoodImage)
 
-            // Sepete ekle butonu
             binding.btnAddToCart.setOnClickListener {
                 onAddToCartClick(food)
             }
 
-            // Kartın tamamına tıklama (detay ekranına yönlendirme)
             binding.root.setOnClickListener {
                 onItemClick(food)
             }
+
+            val isFavorite = foodViewModel.isFavorite(food)
+            binding.btnFavorite.setImageResource(
+                if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+            )
+
+            binding.btnFavorite.setOnClickListener {
+                if (isFavorite) {
+                    foodViewModel.removeFromFavorites(food)
+                } else {
+                    foodViewModel.addToFavorites(food)
+                }
+                notifyItemChanged(adapterPosition)
+            }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {

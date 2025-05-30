@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -25,8 +26,7 @@ class FavoritesFragment : Fragment() {
     private lateinit var favoritesAdapter: FavoritesAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
@@ -42,7 +42,6 @@ class FavoritesFragment : Fragment() {
             adapter = favoritesAdapter
         }
 
-        // StateFlow gözlemi için lifecycleScope.launch
         viewLifecycleOwner.lifecycleScope.launch {
             foodViewModel.favoriteFoods.collectLatest { favorites ->
                 favoritesAdapter.submitList(favorites.toList())

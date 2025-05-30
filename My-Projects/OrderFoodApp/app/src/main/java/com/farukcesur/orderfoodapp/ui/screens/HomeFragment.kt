@@ -42,8 +42,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = FoodAdapter(
+            foodViewModel = viewModel,
             onAddToCartClick = { selectedFood ->
-                viewModel.addToCart(selectedFood)
+                viewModel.addToCart(selectedFood, 1)
                 Toast.makeText(
                     requireContext(),
                     "${selectedFood.yemek_adi} sepete eklendi",
