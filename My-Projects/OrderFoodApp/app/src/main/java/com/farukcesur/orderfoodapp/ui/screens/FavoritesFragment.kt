@@ -45,8 +45,17 @@ class FavoritesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             foodViewModel.favoriteFoods.collectLatest { favorites ->
                 favoritesAdapter.submitList(favorites.toList())
+
+                if (favorites.isEmpty()) {
+                    binding.textViewEmptyFavorites.visibility = View.VISIBLE
+                    binding.recyclerViewFavorites.visibility = View.GONE
+                } else {
+                    binding.textViewEmptyFavorites.visibility = View.GONE
+                    binding.recyclerViewFavorites.visibility = View.VISIBLE
+                }
             }
         }
+
     }
 
     override fun onDestroyView() {

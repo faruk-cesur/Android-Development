@@ -81,8 +81,9 @@
             android:id="@+id/btnAddToCartFromDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sepete Ekle"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#323232"
+            android:text="Sepete Ekle" />
 
         <ImageButton
             android:id="@+id/btnFavoriteFromDetail"

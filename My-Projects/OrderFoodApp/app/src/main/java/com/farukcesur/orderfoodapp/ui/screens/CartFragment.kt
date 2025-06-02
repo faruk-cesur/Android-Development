@@ -43,8 +43,13 @@ class CartFragment : Fragment() {
                 }
                 binding.recyclerViewCart.adapter = adapter
 
-                binding.textViewEmptyCart.visibility =
-                    if (cartItems.isEmpty()) View.VISIBLE else View.GONE
+                if (cartItems.isEmpty()) {
+                    binding.textViewEmptyCart.visibility = View.VISIBLE
+                    binding.cartSummaryLayout.visibility = View.GONE
+                } else {
+                    binding.textViewEmptyCart.visibility = View.GONE
+                    binding.cartSummaryLayout.visibility = View.VISIBLE
+                }
             }
         }
 

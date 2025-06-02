@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,27 +9,29 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@drawable/bg_card"
         android:elevation="4dp"
-        android:orientation="vertical"
         android:padding="8dp">
 
         <!-- Yemeğin resmi -->
         <ImageView
             android:id="@+id/ivFoodImage"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="150dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Yemeğin adı -->
         <TextView
             android:id="@+id/tvFoodName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
@@ -39,45 +40,50 @@
             android:text="Yemek Adı"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/ivFoodImage"
+            app:layout_constraintStart_toStartOf="@+id/ivFoodImage"
+            app:layout_constraintTop_toBottomOf="@id/ivFoodImage" />
 
-        <!-- Fiyat, Sepete Ekle ve Favori -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Fiyat, Favori ve Sepet -->
+
+        <TextView
+            android:id="@+id/tvFoodPrice"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_marginTop="8dp"
+            android:paddingStart="5dp"
+            android:text="₺000.00"
+            android:textAlignment="center"
+            android:textColor="#4CAF50"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/ivFoodImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvFoodName" />
 
-            <TextView
-                android:id="@+id/tvFoodPrice"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="5dp"
-                android:text="₺0000"
-                android:textColor="#4CAF50"
-                android:textSize="20sp" />
+        <ImageButton
+            android:id="@+id/btnFavorite"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Favoriye Ekle"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_favorite_border"
+            app:layout_constraintEnd_toEndOf="@+id/ivFoodImage"
+            app:layout_constraintTop_toTopOf="@+id/ivFoodImage"
+            app:tint="#F44336" />
 
-            <ImageButton
-                android:id="@+id/btnFavorite"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="5dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Favoriye Ekle"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_favorite_border"
-                app:tint="#F44336" />
+        <ImageButton
+            android:id="@+id/btnAddToCart"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Sepete Ekle"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_add"
+            app:layout_constraintEnd_toEndOf="@+id/ivFoodImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvFoodName"
+            app:tint="#4CAF50" />
 
-            <ImageButton
-                android:id="@+id/btnAddToCart"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Sepete Ekle"
-                android:src="@drawable/ic_add"
-                android:scaleType="fitCenter"
-                app:tint="#4CAF50" />
-        </LinearLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
