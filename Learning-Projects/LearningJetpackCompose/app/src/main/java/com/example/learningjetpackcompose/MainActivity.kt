@@ -42,12 +42,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GameScreen(){
     var health by remember {mutableStateOf(100)}
-    var healthText : String
-
-    if (health > 0){
-        healthText = "Health: $health"
-    }else healthText = "Character is dead!"
-
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -55,13 +49,13 @@ fun GameScreen(){
         modifier = Modifier
         .fillMaxSize()
         .background(color = Color.LightGray)) {
-        Text(healthText,
+        Text(text= if(health>0)"Health: $health" else "Character is dead!",
             modifier = Modifier
                 .padding(16.dp),
             fontWeight = FontWeight.Bold,
             fontSize = 32.sp)
 
-        Button(onClick = { health-= 10 }){
+        Button(onClick = {health-= 10}, enabled = health > 0){
             Text("Damage",modifier = Modifier
                 .padding(8.dp),
                 fontSize = 24.sp
