@@ -15,19 +15,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun StatelessGameUI(health: Int, onDamageClick:()-> Unit,isCharacterDead : Boolean){
+fun StatelessGameUI(health: Int, onDamageClick: () -> Unit, isCharacterDead: Boolean) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.LightGray)
-            .padding(16.dp)) {
+            .padding(16.dp)
+    ) {
         Text(
             text = if (isCharacterDead) "Character is DEAD!" else "Health: $health",
             modifier = Modifier.padding(16.dp),
             fontSize = 32.sp,
-            color = if(isCharacterDead) Color.Red else Color.Black)
+            color = if (isCharacterDead) Color.Red else Color.Black
+        )
 
         Button(onClick = onDamageClick, enabled = health > 0) {
             Text("DAMAGE", fontSize = 24.sp)
