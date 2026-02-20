@@ -11,7 +11,7 @@ import com.example.learningjetpackcompose.game.ui.components.StatelessGameUI
 fun MainGameScreen(){
     val viewModel: GameViewModel = viewModel()
 
-    StatelessGameUI(viewModel.currentHealth, onDamageClick = {viewModel.takeDamage(10)})
+    StatelessGameUI(viewModel.currentHealth, onDamageClick = {viewModel.takeDamage(10)}, viewModel.isCharacterDead)
 }
 
 @Preview(showBackground = true)
